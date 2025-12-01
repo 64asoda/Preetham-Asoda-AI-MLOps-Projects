@@ -1,0 +1,22 @@
+# CORE AIRFLOW PACKAGE
+astro-sdk-python
+apache-airflow
+apache-airflow-providers-cncf-kubernetes
+
+# DATA LIBRARIES
+pandas
+numpy
+
+# PYTHON & DATABASE DRIVERS
+setuptools
+psycopg2-binary>=2.9
+sqlalchemy
+uvicorn
+Pillow
+pendulum
+opencv-python-headless
+
+# AIRFLOW PROVIDERS
+apache-airflow-providers-amazon
+apache-airflow-providers-databricks
+apache-airflow-providers-postgres

@@ -1,0 +1,12 @@
+services:
+  scheduler:
+    volumes:
+      - ./artifacts/raw:/usr/local/airflow/data/raw
+
+  webserver:
+    volumes:
+      - ./artifacts/raw:/usr/local/airflow/data/raw
+
+  triggerer:
+    volumes:
+      - ./artifacts/raw:/usr/local/airflow/data/raw

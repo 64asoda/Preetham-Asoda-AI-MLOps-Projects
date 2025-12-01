@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #0056b3; }
+        .result { font-size: 24px; font-weight: bold; margin: 20px 0; padding: 15px; border-radius: 5px; background-color: #e6f7ff; color: #0056b3; }
+        .error { color: #dc3545; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 5px; }
+        a { text-decoration: none; color: #007bff; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        {% if error %}
+            <div class="result error">{{ error }}</div>
+            <p>Please go back and correct the input.</p>
+        {% else %}
+            <div class="result">
+                {{ prediction_text | safe }}
+            </div>
+            <h2>Input Data Received:</h2>
+            <pre style="text-align: left; background: #eee; padding: 15px; border-radius: 4px;">{{ input_data }}</pre>
+        {% endif %}
+        <p><a href="/">Calculate Another Prediction</a></p>
+    </div>
+</body>
+</html>

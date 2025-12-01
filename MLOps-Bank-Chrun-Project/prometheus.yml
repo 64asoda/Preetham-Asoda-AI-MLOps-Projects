@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s # runs each 15 secs to get data (frequency)
+
+scrape_configs:
+  - job_name: 'flask_app'
+    static_configs:
+      - targets: ['host.docker.internal:5000']  #localhost is for docker container ; to fetch from PC, need to use host.docker.internal (flask)

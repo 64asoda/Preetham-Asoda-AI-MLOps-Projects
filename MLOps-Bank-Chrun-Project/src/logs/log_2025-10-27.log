@@ -1,0 +1,4 @@
+2025-10-27 21:20:01,857 - INFO - Data Processing is initialized
+2025-10-27 21:20:01,857 - INFO - Start of Data Processing Pipeline
+2025-10-27 21:20:01,858 - ERROR - Error while reading data [Errno 2] No such file or directory: 'artifacts/raw\\bankchurn_train.csv'
+2025-10-27 21:20:01,859 - ERROR - Error during Data Processing CustomException.__init__() missing 1 required positional argument: 'error_detail'

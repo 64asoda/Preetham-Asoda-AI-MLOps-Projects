@@ -1,0 +1,12 @@
+project:
+    name: retail-intelligence-project
+
+deployments:
+      - name: dev
+        executor: celery
+        image:
+            name: quay.io/astronomer/astro-runtime:13.0.0
+        env: dev
+        volumes:
+            - ./include:/usr/local/airflow/include
+            - ./artifacts/raw:/usr/local/airflow/data/raw

@@ -1,0 +1,17 @@
+pandas
+numpy
+setuptools
+psycopg2-binary>=2.9
+scikit-learn
+imbalanced-learn
+redis
+flask
+alibi-detect
+prometheus_client
+chardet
+xgboost
+skimpy
+summarytools
+matplotlib
+seaborn
+regex
