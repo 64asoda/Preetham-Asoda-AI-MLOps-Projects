@@ -1,0 +1,19 @@
+# =============================================================================
+# SubtitleRAG - Kubernetes Service (NodePort for Minikube)
+# =============================================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: subtitle-rag-service
+  labels:
+    app: subtitle-rag
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8000
+      nodePort: 30080
+      protocol: TCP
+      name: http
+  selector:
+    app: subtitle-rag

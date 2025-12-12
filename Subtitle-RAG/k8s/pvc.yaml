@@ -1,0 +1,39 @@
+# =============================================================================
+# SubtitleRAG - PersistentVolume and PersistentVolumeClaim
+# =============================================================================
+# This configuration creates storage for ChromaDB data in Minikube.
+# =======================================================================
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: subtitle-rag-pv
+  labels:
+    app: subtitle-rag
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce #Single pad can read and write
+  persistentVolumeReclaimPolicy: Retain  # Keep data even if PVC is deleted
+  hostPath:
+    path: "/mnt/data/chroma" # Location on Minikube VM
+    type: DirectoryOrCreate # Create if doesn't exist
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: subtitle-rag-pvc
+  labels:
+    app: subtitle-rag
+spec:
+  storageClassName: manual # Matches PV's storageClassName
+  accessModes:
+    - ReadWriteOnce # Must match or be subset of PV's accessModes
+  resources:
+    requests:
+      storage: 10Gi # Must be <= PV's capacity

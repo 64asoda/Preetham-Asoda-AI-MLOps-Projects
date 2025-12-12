@@ -1,1 +1,1 @@
-Preetham-Asoda-DS-ML-GenAI-Projects
+Preetham-Asoda-AI-MLOps-Projects

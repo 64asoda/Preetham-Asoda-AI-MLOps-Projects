@@ -1,0 +1,21 @@
+# =============================================================================
+# SubtitleRAG - Kubernetes ConfigMap
+# =============================================================================
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: subtitle-rag-config
+  labels:
+     app: subtitle-rag
+data:
+  CHROMA_PERSIST_DIR: "/app/chroma_data/subtitle_project_chroma_db_"
+  CHROMA_COLLECTION_NAME: "subtitle_project_vector_database"
+  EMBEDDING_MODEL: "sentence-transformers/all-mpnet-base-v2"
+  API_HOST: "0.0.0.0"
+  API_PORT: "8000"
+  DEFAULT_TOP_K: "5"
+  CHUNK_SIZE: "1000"
+  CHUNK_OVERLAP: "50"
+  LANGCHAIN_TRACING_V2: "false"
+  LANGCHAIN_PROJECT: "subtitle-rag"

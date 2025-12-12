@@ -1,0 +1,13 @@
+# =============================================================================
+# SubtitleRAG - Heavy Dependencies (Cached Layer)
+# =============================================================================
+
+# PyTorch CPU-only
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1+cpu
+
+# Embeddings
+sentence-transformers>=3.0.0
+
+# Numerical
+numpy==1.26.3

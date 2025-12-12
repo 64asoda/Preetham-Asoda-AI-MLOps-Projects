@@ -1,0 +1,66 @@
+# =============================================================================
+# SubtitleRAG - Horizontal Pod Autoscaler (HPA)
+# =============================================================================
+# NOTE: Requires metrics-server to be running in Minikube
+#       Enable with: minikube addons enable metrics-server
+# =============================================================================
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: subtitle-rag-hpa
+  labels:
+    app: subtitle-rag
+spec:
+  # Target the deployment to scale
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: subtitle-rag
+  
+  # Replica limits (adjusted for Minikube)
+  minReplicas: 1    # Always run at least 1 for redundancy
+  maxReplicas: 3    # Max 3 pods
+  
+  # Scaling metrics
+  metrics:
+    # Scale based on CPU usage
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70  # Scale up if CPU > 70%
+    
+    # Scale based on memory usage
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80  # Scale up if Memory > 80%
+  
+  # Scaling behavior (prevents thrashing)
+  behavior:
+    # Scale DOWN slowly to avoid disruption
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Wait 5 minutes before scaling down
+      policies:
+        - type: Percent
+          value: 50           # Remove max 50% of pods
+          periodSeconds: 60   # Every 60 seconds
+        - type: Pods
+          value: 1            # Or remove max 1 pod
+          periodSeconds: 60   # Every 60 seconds
+      selectPolicy: Min       # Use the slower (more conservative) policy
+    
+    # Scale UP quickly to handle traffic spikes
+    scaleUp:
+      stabilizationWindowSeconds: 60   # Wait 1 minute before scaling up
+      policies:
+        - type: Percent
+          value: 100          # Add max 100% of current pods (double)
+          periodSeconds: 60   # Every 60 seconds
+        - type: Pods
+          value: 2            # Or add max 2 pods at once
+          periodSeconds: 60   # Every 60 seconds
+      selectPolicy: Max       # Use the faster (more aggressive) policy
