@@ -3,3 +3,5 @@ venv
 
 # Local data (if you don't want to track it)
 /Subtitle-RAG/chroma_data/
+
+.env

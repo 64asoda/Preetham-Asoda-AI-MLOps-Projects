@@ -7,6 +7,7 @@ from typing import Optional
 
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
+from langsmith import traceable
 
 from src.config import get_settings
 from src.embedding.embedder import get_embeddings_model
@@ -34,7 +35,7 @@ def get_chroma_db() -> Chroma:
     
     return _chroma_db
 
-
+@traceable(run_type="retriever", name="subtitle_search")
 def search_similar(query: str, top_k: Optional[int] = None, score_threshold: Optional[float] = None) -> list[dict]:
         """
     Search for similar documents using text query.
@@ -70,6 +71,7 @@ def search_similar(query: str, top_k: Optional[int] = None, score_threshold: Opt
         return formatted_results
 
 
+@traceable(run_type="retriever", name="vector_search")
 def search_by_vector(embedding: list[float], top_k: Optional[int] = None) -> list[dict]:
      """Search for similar documents using embedding vector."""
      settings = get_settings()

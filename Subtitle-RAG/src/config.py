@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     # LangSmith
     LANGCHAIN_TRACING_V2: str = os.getenv("LANGCHAIN_TRACING_V2", "FALSE")
     LANGCHAIN_API_KEY: str = os.getenv("LANGCHAIN_API_KEY", "")
+    LANGCHAIN_PROJECT: str = "SubtitleRAG"
 
     class Config:
         env_file = ".env"
@@ -35,8 +36,6 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Cached settings instance."""
     return Settings()
-
-
 
 
 
